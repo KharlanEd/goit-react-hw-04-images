@@ -1,16 +1,55 @@
-export const App = () => {
-  return (
+import { useState } from "react"
+import { Searchbar } from "./Searchbar"
+import css from "components/styles.module.css"
+import { ImageGallery } from "./ImageGallery"
+import { ToastContainer } from 'react-toastify';
+import { Modal } from "./Modal";
+
+
+
+
+export function App () {
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
+  const [nameChange, setNameChange] = useState('');
+
+
+ const formSubmit = imgName => {
+    setNameChange(imgName)
+    
+  }
+ 
+ const toggleModal = evt => {
+    setIsOpenModal(!isOpenModal)
+  };
+
+ const openModal = largeImage => {
+   setCurrentImage(largeImage);  
+   setIsOpenModal(true)
+   
+  };
+
+ 
+  return(
     <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
+      className={css.App}
+     
     >
-      React homework template
+      <Searchbar onSubmit={formSubmit} />
+      <ImageGallery
+      imgName={nameChange} 
+      onClick={openModal}  
+      
+      />
+        
+
+      {isOpenModal && (
+          <Modal
+         onClose={toggleModal} currentImage={currentImage}
+          />
+        )}
+      <ToastContainer autoClose={3000}/>
     </div>
-  );
-};
+  )
+}
+
