@@ -9,7 +9,7 @@ import {getImage} from "./service/imgApi"
 export function ImageGallery ({onClick,imgName}) {
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-  const [status,setStatus]= useState('id')
+  const [status,setStatus]= useState('init')
  
   // state = {
   //   page: 1,
@@ -17,21 +17,13 @@ export function ImageGallery ({onClick,imgName}) {
   //   status: 'id',
   // };
 
-  useEffect(() => {
-    setStatus('loading');
-    async function getData() {
-        try {  
-        const newData = await getImage(imgName);
-          setImages(newData);
-          setStatus('resolved')
-      } catch {
-        setStatus('error')
-      }
-    }
-    getData()
-  }, [imgName])
+
   
   useEffect(() => {
+    if (!imgName) {
+      return
+    }
+    
     async function getData() {
        try {  
         const newData = await getImage(imgName);
@@ -42,7 +34,7 @@ export function ImageGallery ({onClick,imgName}) {
       }
     }
   getData()
-  }, [imgName])
+  },[imgName])
   
   useEffect(() => {
     if (page > 1) {
@@ -58,7 +50,7 @@ export function ImageGallery ({onClick,imgName}) {
     
        
 const  handleLoadMore = () => {
-    setPage(prevState => prevState + 1 );
+    setPage(prevState => (prevState + 1) );
   };
 
   
