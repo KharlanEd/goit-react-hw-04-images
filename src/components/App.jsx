@@ -15,7 +15,7 @@ export function App () {
 
 
  const formSubmit = imgName => {
-    setNameChange(imgName)
+    setNameChange(imgName,)
     
   }
  
