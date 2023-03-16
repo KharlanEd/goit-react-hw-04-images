@@ -1,18 +1,17 @@
 import css from "components/styles.module.css"
 
 
-export const ImageGalleryItem = ({ nameImg,onClick } ) => {
+export const ImageGalleryItem = ({ image ,onClick } ) => {
     
     return (
-        <ul className={css.ImageGallery}>
-            {nameImg.map(({ id, webformatURL,largeImageURL }) =>
-            (<li key={id}
-              onClick={() => onClick(largeImageURL)}  
+       
+            <li key={image.id}
+              onClick={() => onClick(image.largeImageURL)}  
             className={css.ImageGalleryItem}>
-                <img className={css.ImageGalleryItem_image}   src={webformatURL} alt="" />
+                <img className={css.ImageGalleryItem_image}   src={image.webformatURL} alt="" />
             </li>)
-            )}
+            
       
-        </ul>
-    )
+       
+    
 }
