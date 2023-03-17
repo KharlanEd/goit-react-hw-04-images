@@ -23,17 +23,17 @@ export function App() {
   
 
   const formSubmit = imgName => {
-    setNameChange(imgName)
+    
     setImages([])
     setPage(1)
-    
+    setNameChange(imgName)
   }
 
-  useEffect(() => {
-    if (nameChange) {
-      setPage(1)
-    }
-  }, [nameChange])
+  // useEffect(() => {
+  //   if (nameChange) {
+  //     setPage(1)
+  //   }
+  // }, [nameChange])
  
   
   useEffect(() => {
@@ -48,13 +48,9 @@ export function App() {
         setIsLoading(true)
         const newData = await getImage(nameChange, page);
         
-        setImages(newData);
-        
-        
-        if (page > 1) {
           setImages(prevState => [...prevState, ...newData])
 
-        }
+        
         
       } catch(error) {
        console.log(error);
@@ -87,7 +83,7 @@ export function App() {
   
   }
 
-
+ 
   
     
   
@@ -104,6 +100,7 @@ export function App() {
       {isImages && (
       <ImageGallery
           images={images}
+         
           onClick={openModal}
    
         />)}
